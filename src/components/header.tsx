@@ -212,7 +212,7 @@ export function Header({ cartItems, removeFromCart, clearCart, finalizePurchase 
             className="p-6 overflow-y-auto max-h-[80vh] relative z-50"
           >
             <button
-              className="absolute top-2 right-2 text-humores-bg2 hover:text-humores-bg6 cursor-pointer cursor-pointer"
+              className="absolute top-2 right-2 text-humores-bg2 hover:text-humores-bg6 cursor-pointer"
               onClick={toggleCart}
               aria-label="Fechar"
             >
