@@ -5,6 +5,7 @@ import { Header } from './components/header';
 import { ProductDetails } from './components/productDetails';
 import { CartSummary } from './components/cartSummary';
 import { Profile } from './components/profile'; // Importação do histórico
+import { ProductPage } from './components/productPage';
 
 interface Product {
   id: number;
@@ -64,6 +65,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<Body />} />
         <Route path="/product/:type" element={<ProductDetails addToCart={addToCart} />} />
+        <Route path="/product/:type/:id" element={<ProductPage addToCart={(product) => addToCart({ ...product, id: Number(product.id) })} />} />
         <Route path="/cart-summary" element={<CartSummary cartItems={cartItems} removeFromCart={removeFromCart} setCartItems={setCartItems} />} />
         <Route path="/profile" element={<Profile />} /> 
       </Routes>

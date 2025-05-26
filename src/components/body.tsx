@@ -37,11 +37,14 @@ export function Body() {
         >
           {title}
         </h2>
-        <div className="relative w-64 h-64 mb-4 flex items-center justify-center">
+        <div
+          className="relative w-64 h-64 mb-4 flex items-center justify-center cursor-pointer"
+          onClick={() => navigate(`/product/${key}/${currentProduct.id}`)}
+        >
           <img
             src={currentProduct.image}
             alt={currentProduct.type}
-            className="w-full h-full rounded-md object-contain bg-white"
+            className="w-full h-full rounded-md object-contain bg-white transition-transform duration-300 hover:scale-110"
             loading="lazy"
           />
         </div>
@@ -53,6 +56,12 @@ export function Body() {
                 idx === pageIndex ? 'bg-[#DCAB6B]' : 'bg-[#F0D9B5]'
               } hover:scale-125`}
               onClick={() =>
+                setCurrentIndex((prev) => ({
+                  ...prev,
+                  [key]: pageIndex,
+                }))
+              }
+              onMouseEnter={() =>
                 setCurrentIndex((prev) => ({
                   ...prev,
                   [key]: pageIndex,

@@ -53,23 +53,21 @@ export function ProductDetails({ addToCart }: { addToCart: (product: { id: numbe
         {products.map((product) => (
           <div
             key={product.id}
-            className={`border border-humores-bg2 p-4 rounded-lg shadow-md bg-humores-bg4 flex flex-col items-center transition-transform duration-300 ${
-              addedMap[product.id] ? 'animate-bounce-once ring-4 ring-humores-bg4' : ''
-            }`}
+            className={`border border-humores-bg2 p-4 rounded-lg shadow-md bg-humores-bg4 flex flex-col items-center transition-transform duration-300`}
           >
             <img
               src={product.image}
               alt={product.type}
-              className="w-64 h-64 rounded-md mb-4 object-contain bg-white"
+              className="w-64 h-64 rounded-md mb-4 object-contain bg-white transition-transform duration-300 hover:scale-110"
             />
             <h2 className="text-lg font-bold text-black font-exo">{product.type}</h2>
             <p className="text-humores-bg2 mt-2">{product.price}</p>
             <p className="text-gray-700 mt-4 text-center">{product.description}</p>
             <button
-              className="mt-4 bg-[#DCAB6B] text-humores-bg4 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer"
+              className="mt-4 bg-[#DCAB6B] text-humores-bg4 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer transition-transform duration-200 hover:scale-105"
               onClick={() => handleAddToCart(product)}
             >
-              Adicionar ao Carrinho
+              {addedMap[product.id] ? 'Adicionado!' : 'Adicionar ao Carrinho'}
             </button>
           </div>
         ))}

@@ -118,7 +118,7 @@ export function CartSummary({ cartItems, removeFromCart, setCartItems }: CartSum
                   .replace(',', '.')
               ) * (item.quantity || 1)).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
               <button
-                className="bg-[#DCAB6B] text-humores-bg4 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer"
+                className="bg-[#DCAB6B] text-humores-bg4 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer transition-transform duration-200 hover:scale-105"
                 onClick={() => removeFromCart(item.id)}
               >
                 Remover
@@ -148,28 +148,35 @@ export function CartSummary({ cartItems, removeFromCart, setCartItems }: CartSum
       </div>
       <div className="flex justify-between">
         <button
-          className="bg-[#DCAB6B] text-humores-bg4 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer"
+          className="bg-[#DCAB6B] text-humores-bg4 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer transition-transform duration-200 hover:scale-105"
           onClick={() => navigate('/')}
         >
           Continuar Comprando
         </button>
         <button
-          className="bg-[#DCAB6B] text-humores-bg4 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer"
+          className="bg-[#DCAB6B] text-humores-bg4 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer transition-transform duration-200 hover:scale-105"
           onClick={handleConfirmPurchase}
         >
           Confirmar Compra
         </button>
       </div>
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-20">
-          <div className="bg-white p-8 rounded shadow text-center">
-            <h2 className="text-2xl font-bold text-humores-bg2 mb-4">Compra finalizada!</h2>
-            <p className="text-humores-bg6">Obrigado por comprar conosco.</p>
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-20">
+          <div className="bg-white p-8 rounded-lg shadow-lg text-center max-w-md w-full border border-humores-bg2">
+            <svg className="mx-auto mb-4" width="64" height="64" fill="none" viewBox="0 0 64 64">
+              <circle cx="32" cy="32" r="32" fill="#DCAB6B" />
+              <path d="M20 33l8 8 16-16" stroke="#fff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <h2 className="text-2xl font-bold text-humores-bg2 mb-2">Compra finalizada com sucesso!</h2>
+            <p className="text-humores-bg6 mb-4">
+              Obrigado por comprar conosco.<br />
+              Seu pedido foi registrado e em breve você poderá acompanhar pelo seu perfil.
+            </p>
             <button
-              className="bg-[#DCAB6B] text-humores-bg4 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer mt-4"
+              className="bg-[#DCAB6B] text-humores-bg4 px-6 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer mt-2 transition-transform duration-200 hover:scale-105"
               onClick={handleCloseModal}
             >
-              Ir para o Histórico
+              Ir para o Histórico de Compras
             </button>
           </div>
         </div>
