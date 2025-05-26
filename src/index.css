@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* fundo branco */
+  color: #1b3522; /* humores-bg2 */
+}
+
+h1, h2, h3 {
+  font-family: 'Exo', sans-serif; /* Fonte Exile para títulos */
+}
+
+@keyframes bounce-once {
+  0% { transform: scale(0.9);}
+  50% { transform: scale(1.05);}
+  100% { transform: scale(1);}
+}
+
+.animate-bounce-once {
+  animation: bounce-once 0.6s cubic-bezier(.68,-0.55,.27,1.55) 1;
+}
