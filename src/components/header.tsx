@@ -87,10 +87,24 @@ export function Header({ cartItems, removeFromCart, clearCart, finalizePurchase 
             className="h-14 w-14 text-black cursor-pointer hover:text-humores-bg2"
             onClick={() => navigate('/')}
           />
-          <div className="flex items-center gap-1 relative">
+          <div
+            className="flex items-center gap-1 relative"
+            tabIndex={-1}
+            onBlur={e => {
+              // Fecha a barra de pesquisa se o foco sair do container e do input/modal
+              if (
+                !e.currentTarget.contains(e.relatedTarget as Node) &&
+                !showResultsModal
+              ) {
+                setShowSearch(false);
+                setSearch('');
+              }
+            }}
+          >
             <AiOutlineSearch
               className="h-14 w-14 text-black cursor-pointer hover:text-humores-bg2"
               onClick={() => setShowSearch((prev) => !prev)}
+              tabIndex={0}
             />
             {(showSearch || showResultsModal) && (
               <input
@@ -101,51 +115,66 @@ export function Header({ cartItems, removeFromCart, clearCart, finalizePurchase 
                 onChange={e => handleSearch(e.target.value)}
                 className="px-2 py-1 rounded border border-humores-bg2 focus:outline-none focus:ring-2 focus:ring-humores-bg2 text-black w-[350px] absolute left-[60px] top-1/2 -translate-y-1/2 bg-white"
                 style={{ background: "#fff" }}
-                onBlur={() => {
-                  if (!showResultsModal) setShowSearch(false);
-                }}
+                tabIndex={0}
               />
             )}
             {showResultsModal && (
-              <div className="absolute left-[60px] top-full mt-2 w-[350px] max-w-lg z-50">
-                <div className="bg-white p-6 rounded shadow-lg max-h-[60vh] overflow-y-auto relative border border-humores-bg2">
-                  <button
-                    className="absolute top-2 right-2 text-humores-bg2 hover:text-humores-bg6"
-                    onClick={() => {
-                      setShowResultsModal(false);
-                      setShowSearch(false);
-                    }}
-                    aria-label="Fechar"
+              <div
+                className="fixed inset-0 z-50"
+                style={{ background: 'transparent' }}
+                onClick={() => {
+                  setShowResultsModal(false);
+                  setShowSearch(false);
+                  setSearch('');
+                }}
+              >
+                <div
+                  className="absolute left-[60px] top-[70px] mt-2 w-[350px] max-w-lg"
+                  style={{ zIndex: 60 }}
+                  onClick={e => e.stopPropagation()}
+                >
+                  <div
+                    className="bg-white p-6 rounded shadow-lg max-h-[60vh] overflow-y-auto relative border border-humores-bg2"
                   >
-                    <AiOutlineClose size={24} />
-                  </button>
-                  <h2 className="text-xl font-bold mb-4 text-humores-bg2">Resultados da Pesquisa</h2>
-                  {searchResults.length > 0 ? (
-                    <ul>
-                      {searchResults.map((item) => (
-                        <li
-                          key={item.id}
-                          className="flex items-center gap-4 mb-4 cursor-pointer hover:bg-[#F8F8E7] p-2 rounded transition group"
-                          onClick={() => handleResultClick(item)}
-                        >
-                          <img
-                            src={item.image}
-                            alt={item.type}
-                            className="w-12 h-12 object-contain bg-white rounded transition-transform duration-300 group-hover:scale-110"
-                          />
-                          <div>
-                            <div className="font-bold text-humores-bg2">{item.type}</div>
-                            <div className="text-humores-bg2">{item.price}</div>
-                            {item.description && (
-                              <div className="text-xs text-gray-600">{item.description}</div>
-                            )}
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className="text-humores-bg2">Nenhum produto encontrado.</div>
-                  )}
+                    <button
+                      className="absolute top-2 right-2 text-humores-bg2 hover:text-humores-bg6 cursor-pointer"
+                      onClick={() => {
+                        setShowResultsModal(false);
+                        setShowSearch(false);
+                        setSearch('');
+                      }}
+                      aria-label="Fechar"
+                    >
+                      <AiOutlineClose size={24} />
+                    </button>
+                    <h2 className="text-xl font-bold mb-4 text-humores-bg2">Resultados da Pesquisa</h2>
+                    {searchResults.length > 0 ? (
+                      <ul>
+                        {searchResults.map((item) => (
+                          <li
+                            key={item.id}
+                            className="flex items-center gap-4 mb-4 cursor-pointer hover:bg-[#F8F8E7] p-2 rounded transition group"
+                            onClick={() => handleResultClick(item)}
+                          >
+                            <img
+                              src={item.image}
+                              alt={item.type}
+                              className="w-12 h-12 object-contain bg-white rounded transition-transform duration-300 group-hover:scale-110"
+                            />
+                            <div>
+                              <div className="font-bold text-humores-bg2">{item.type}</div>
+                              <div className="text-humores-bg2">{item.price}</div>
+                              {item.description && (
+                                <div className="text-xs text-gray-600">{item.description}</div>
+                              )}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="text-humores-bg2">Nenhum produto encontrado.</div>
+                    )}
+                  </div>
                 </div>
               </div>
             )}
@@ -174,10 +203,17 @@ export function Header({ cartItems, removeFromCart, clearCart, finalizePurchase 
         <div
           className="fixed top-0 right-0 h-auto max-h-screen w-[500px] shadow-lg z-50 bg-white border border-humores-bg2"
         >
-          <div className="p-6 overflow-y-auto max-h-[80vh] relative">
-            {/* Botão de fechar no canto superior direito */}
+          <div
+            className="fixed inset-0 z-40"
+            onClick={toggleCart}
+            style={{ background: 'transparent' }}
+          />
+          <div
+            className="p-6 overflow-y-auto max-h-[80vh] relative z-50"
+            onClick={e => e.stopPropagation()}
+          >
             <button
-              className="absolute top-2 right-2 text-humores-bg2 hover:text-humores-bg6"
+              className="absolute top-2 right-2 text-humores-bg2 hover:text-humores-bg6 cursor-pointer cursor-pointer"
               onClick={toggleCart}
               aria-label="Fechar"
             >
@@ -280,8 +316,14 @@ export function Header({ cartItems, removeFromCart, clearCart, finalizePurchase 
         </div>
       )}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
-          <div className="bg-white p-8 rounded shadow text-center">
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className="bg-white p-8 rounded shadow text-center"
+            onClick={e => e.stopPropagation()}
+          >
             <h2 className="text-2xl font-bold text-humores-bg2 mb-4">Confirmar Compra</h2>
             <p className="text-humores-bg6 mb-4">Deseja finalizar sua compra?</p>
             <div className="flex justify-center gap-4">

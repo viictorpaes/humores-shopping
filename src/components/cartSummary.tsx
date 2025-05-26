@@ -161,8 +161,14 @@ export function CartSummary({ cartItems, removeFromCart, setCartItems }: CartSum
         </button>
       </div>
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-20">
-          <div className="bg-white p-8 rounded-lg shadow-lg text-center max-w-md w-full border border-humores-bg2">
+        <div
+          className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-20"
+          onClick={handleCloseModal}
+        >
+          <div
+            className="bg-white p-8 rounded-lg shadow-lg text-center max-w-md w-full border border-humores-bg2"
+            onClick={e => e.stopPropagation()}
+          >
             <svg className="mx-auto mb-4" width="64" height="64" fill="none" viewBox="0 0 64 64">
               <circle cx="32" cy="32" r="32" fill="#DCAB6B" />
               <path d="M20 33l8 8 16-16" stroke="#fff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
