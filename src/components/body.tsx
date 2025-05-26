@@ -71,12 +71,6 @@ export function Body() {
           ))}
         </div>
         <h3 className="text-lg font-bold text-black text-center mt-4">{currentProduct.type}</h3>
-        <div className="text-humores-bg2 font-bold text-lg mt-1">
-          {(() => {
-            const price = currentProduct.price.replace('R$', '').replace(/\./g, '').replace(',', '.');
-            return 'R$ ' + Number(price).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-          })()}
-        </div>
       </div>
     );
   };
@@ -88,7 +82,7 @@ export function Body() {
           Melhores roupas de grife para homens
         </h1>
         <span className="text-2xl font-bold text-humores-bg2 font-exo">
-          Vista-se bem, Vista-se com a Humores.
+          Vista-se bem, Vista-se através da Humores.
         </span>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

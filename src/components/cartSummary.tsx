@@ -40,7 +40,8 @@ export function CartSummary({ cartItems, removeFromCart, setCartItems }: CartSum
     0
   );
 
-  const installmentValue = (total / installments).toFixed(2).replace('.', ',');
+  const installmentValue = (total / installments)
+    .toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   const handleConfirmPurchase = () => {
     if (cartItems.length > 0) {

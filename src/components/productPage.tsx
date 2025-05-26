@@ -42,7 +42,10 @@ export function ProductPage({ addToCart }: { addToCart: (product: Product) => vo
   const handleAddToCart = () => {
     addToCart(product);
     setAdded(true);
-    setTimeout(() => setAdded(false), 700);
+    setTimeout(() => {
+      setAdded(false);
+      navigate('/');
+    }, 700);
   };
 
   return (
