@@ -4,6 +4,7 @@ import {
   oculos, jeans, bones, acessorios
 } from '../data/products';
 import { useState } from 'react';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 const allTypes = {
   camisetas, calcas, jaquetas, tenis, oculos, jeans, bones, acessorios
@@ -49,7 +50,15 @@ export function ProductPage({ addToCart }: { addToCart: (product: Product) => vo
   };
 
   return (
-    <div className="p-8 flex flex-col items-center bg-white min-h-screen">
+    <div className="p-8 flex flex-col items-center bg-white min-h-screen relative">
+      <button
+        className="absolute top-4 left-4 bg-transparent p-2 rounded-full hover:bg-humores-bg4 transition-colors cursor-pointer transition-transform duration-200 hover:scale-110"
+        onClick={() => navigate(-1)}
+        aria-label="Voltar"
+        type="button"
+      >
+        <AiOutlineArrowLeft size={32} className="text-humores-bg2" />
+      </button>
       <div className="max-w-lg w-full border border-humores-bg2 rounded-lg shadow-md bg-humores-bg4 p-8 flex flex-col items-center">
         <img
           src={product.image}
@@ -69,12 +78,6 @@ export function ProductPage({ addToCart }: { addToCart: (product: Product) => vo
           onClick={handleAddToCart}
         >
           {added ? 'Adicionado!' : 'Adicionar ao Carrinho'}
-        </button>
-        <button
-          className="mt-4 bg-humores-bg4 text-humores-bg8 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer"
-          onClick={() => navigate(-1)}
-        >
-          Voltar
         </button>
       </div>
     </div>

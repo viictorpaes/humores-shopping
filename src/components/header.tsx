@@ -84,7 +84,7 @@ export function Header({ cartItems, removeFromCart, clearCart, finalizePurchase 
       <header className="bg-[#DCAB6B] flex items-center justify-between font-roboto px-4 border-b border-humores-bg2">
         <div className="flex items-center gap-2">
           <AiOutlineHome
-            className="h-14 w-14 text-black cursor-pointer hover:text-humores-bg2"
+            className="h-14 w-14 text-black cursor-pointer hover:text-humores-bg2 transition-transform duration-200 hover:scale-110"
             onClick={() => navigate('/')}
           />
           <div
@@ -102,7 +102,7 @@ export function Header({ cartItems, removeFromCart, clearCart, finalizePurchase 
             }}
           >
             <AiOutlineSearch
-              className="h-14 w-14 text-black cursor-pointer hover:text-humores-bg2"
+              className="h-14 w-14 text-black cursor-pointer hover:text-humores-bg2 transition-transform duration-200 hover:scale-110"
               onClick={() => setShowSearch((prev) => !prev)}
               tabIndex={0}
             />
@@ -189,17 +189,17 @@ export function Header({ cartItems, removeFromCart, clearCart, finalizePurchase 
           <img
             src={humoresLogo}
             alt="Humores Logo"
-            className="h-30 w-50 rounded-full cursor-pointer"
+            className="h-30 w-50 rounded-full cursor-pointer hover:transition-transform duration-200 hover:scale-110"
             onClick={() => navigate('/')}
           />
         </div>
         <div className="flex items-center gap-4">
           <AiOutlineUser
-            className="h-14 w-14 text-black cursor-pointer hover:text-humores-bg2"
+            className="h-14 w-14 text-black cursor-pointer hover:text-humores-bg2 transition-transform duration-200 hover:scale-110"
             onClick={() => navigate('/profile')} // Redireciona para a página de perfil
           />
           <AiOutlineShoppingCart
-            className="h-14 w-14 text-black cursor-pointer hover:text-humores-bg2"
+            className="h-14 w-14 text-black cursor-pointer hover:text-humores-bg2 transition-transform duration-200 hover:scale-110"
             onClick={toggleCart}
           />
         </div>

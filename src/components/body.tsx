@@ -32,7 +32,7 @@ export function Body() {
         className="border border-humores-bg2 p-6 rounded-lg shadow-md bg-humores-bg4 flex flex-col items-center h-auto"
       >
         <h2
-          className="text-2xl font-bold text-humores-bg2 mb-4 cursor-pointer hover:underline font-exo"
+          className="text-2xl font-bold text-humores-bg2 mb-4 cursor-pointer hover:underline font-exo transition-transform duration-200 hover:scale-110"
           onClick={() => navigate(`/product/${key}`)}
         >
           {title}

@@ -1,9 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import {
   camisetas, calcas, jaquetas, tenis,
   oculos, jeans, bones, acessorios
 } from '../data/products';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 interface Product {
   id: number;
@@ -30,6 +31,7 @@ const titles: Record<string, string> = {
 
 export function ProductDetails({ addToCart }: { addToCart: (product: { id: number; type: string; price: string }) => void }) {
   const { type } = useParams();
+  const navigate = useNavigate();
   const products = type ? productsByType[type] : undefined;
   const title = type ? titles[type] || type : '';
   const [addedMap, setAddedMap] = useState<{ [id: number]: boolean }>({});
@@ -47,7 +49,15 @@ export function ProductDetails({ addToCart }: { addToCart: (product: { id: numbe
   };
 
   return (
-    <div className="p-6 bg-white min-h-screen">
+    <div className="p-6 bg-white min-h-screen relative">
+      <button
+        className="absolute top-4 left-4 bg-transparent p-2 rounded-full hover:bg-humores-bg4 transition-colors cursor-pointer transition-transform duration-200 hover:scale-110"
+        onClick={() => navigate(-1)}
+        aria-label="Voltar"
+        type="button"
+      >
+        <AiOutlineArrowLeft size={32} className="text-humores-bg2" />
+      </button>
       <h1 className="text-2xl font-bold text-humores-bg2 mb-6 text-center font-exo">{title}</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.map((product) => (
