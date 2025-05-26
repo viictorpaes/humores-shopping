@@ -104,7 +104,7 @@ export function Header({ cartItems, removeFromCart, clearCart, finalizePurchase 
             {showSearch && (
               <input
                 type="text"
-                placeholder="Pesquisar"
+                placeholder=""
                 value={search}
                 autoFocus
                 onChange={e => setSearch(e.target.value)}
