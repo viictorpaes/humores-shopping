@@ -12,7 +12,7 @@ Este projeto é uma loja virtual de roupas de grife para homens, desenvolvida em
 1. **Clone o repositório**
 
    ```bash
-   git clone (https://github.com/viictorpaes/humores-shopping.git)
+   git clone https://github.com/viictorpaes/humores-shopping.git
    cd humores-shopping
    ```
 
