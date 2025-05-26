@@ -163,7 +163,12 @@ export function Header({ cartItems, removeFromCart, clearCart, finalizePurchase 
                             />
                             <div>
                               <div className="font-bold text-humores-bg2">{item.type}</div>
-                              <div className="text-humores-bg2">{item.price}</div>
+                              <div className="text-humores-bg2 font-bold">
+                                {(() => {
+                                  const price = item.price.replace('R$', '').replace(/\./g, '').replace(',', '.');
+                                  return 'R$ ' + Number(price).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                                })()}
+                              </div>
                               {item.description && (
                                 <div className="text-xs text-gray-600">{item.description}</div>
                               )}
@@ -204,13 +209,7 @@ export function Header({ cartItems, removeFromCart, clearCart, finalizePurchase 
           className="fixed top-0 right-0 h-auto max-h-screen w-[500px] shadow-lg z-50 bg-white border border-humores-bg2"
         >
           <div
-            className="fixed inset-0 z-40"
-            onClick={toggleCart}
-            style={{ background: 'transparent' }}
-          />
-          <div
             className="p-6 overflow-y-auto max-h-[80vh] relative z-50"
-            onClick={e => e.stopPropagation()}
           >
             <button
               className="absolute top-2 right-2 text-humores-bg2 hover:text-humores-bg6 cursor-pointer cursor-pointer"
@@ -255,7 +254,12 @@ export function Header({ cartItems, removeFromCart, clearCart, finalizePurchase 
                           <div className="text-xs text-gray-600 mt-1">{item.description}</div>
                         )}
                         <div className="flex gap-4 mt-1 text-sm">
-                          <span>Preço: <span className="font-bold">{item.price}</span></span>
+                          <span>Preço: <span className="font-bold">
+                            {(() => {
+                              const price = item.price.replace('R$', '').replace(/\./g, '').replace(',', '.');
+                              return 'R$ ' + Number(price).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                            })()}
+                          </span></span>
                           <span>Qtd: <span className="font-bold">{item.quantity || 1}</span></span>
                           <span>
                             Total:{' '}

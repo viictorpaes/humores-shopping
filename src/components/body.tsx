@@ -71,6 +71,12 @@ export function Body() {
           ))}
         </div>
         <h3 className="text-lg font-bold text-black text-center mt-4">{currentProduct.type}</h3>
+        <div className="text-humores-bg2 font-bold text-lg mt-1">
+          {(() => {
+            const price = currentProduct.price.replace('R$', '').replace(/\./g, '').replace(',', '.');
+            return 'R$ ' + Number(price).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          })()}
+        </div>
       </div>
     );
   };
