@@ -69,15 +69,6 @@ export function Profile() {
   return (
     <div className="p-6 bg-white min-h-screen">
       <h1 className="text-2xl font-bold text-humores-bg2 mb-6 text-center">Histórico de Compras</h1>
-      <button
-        className="mb-6 bg-humores-bg4 text-humores-bg8 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer"
-        onClick={() => {
-          localStorage.removeItem('purchaseHistory');
-          setPurchaseHistory([]);
-        }}
-      >
-        Limpar Histórico de Compras
-      </button>
       {loading ? (
         <p className="text-gray-700 text-center">Carregando...</p>
       ) : purchaseHistory.length > 0 ? (
@@ -135,6 +126,15 @@ export function Profile() {
       ) : (
         <p className="text-gray-700 text-center">Você ainda não realizou nenhuma compra.</p>
       )}
+      <button
+        className="mt-8 bg-humores-bg4 text-humores-bg8 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer"
+        onClick={() => {
+          localStorage.removeItem('purchaseHistory');
+          setPurchaseHistory([]);
+        }}
+      >
+        Limpar Histórico de Compras
+      </button>
     </div>
   );
 }
