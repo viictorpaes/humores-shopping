@@ -81,32 +81,57 @@ export function Profile() {
       {loading ? (
         <p className="text-gray-700 text-center">Carregando...</p>
       ) : purchaseHistory.length > 0 ? (
-        [...purchaseHistory].reverse().map((purchase) => (
-          <div key={purchase.id} className="mb-6 border-b pb-4">
-            <h2 className="text-lg font-bold text-humores-bg2 mb-2">Compra #{purchase.id}</h2>
-            <p className="text-humores-bg2 mb-2">Data: {purchase.date}</p>
-            {purchase.items.map((item) => (
-              <div key={item.id} className="flex justify-between items-center mb-2">
-                <div className="flex items-center gap-3">
-                  {item.image && (
-                    <img
-                      src={item.image}
-                      alt={item.type}
-                      className="w-12 h-12 object-contain bg-white rounded"
-                    />
-                  )}
-                  <div>
-                    <span>{item.type} (x{item.quantity || 1})</span>
-                    {item.description && (
-                      <div className="text-xs text-gray-600">{item.description}</div>
+        [...purchaseHistory].reverse().map((purchase) => {
+          const total = purchase.items.reduce(
+            (sum, item) =>
+              sum +
+              parseFloat(
+                item.price
+                  .replace('R$', '')
+                  .replace(/\./g, '')
+                  .replace(',', '.')
+              ) * (item.quantity || 1),
+            0
+          );
+          return (
+            <div key={purchase.id} className="mb-6 border-b pb-4">
+              <h2 className="text-lg font-bold text-humores-bg2 mb-2">Compra #{purchase.id}</h2>
+              <p className="text-humores-bg2 mb-2">Data: {purchase.date}</p>
+              {purchase.items.map((item) => (
+                <div key={item.id} className="flex justify-between items-center mb-2">
+                  <div className="flex items-center gap-3">
+                    {item.image && (
+                      <img
+                        src={item.image}
+                        alt={item.type}
+                        className="w-12 h-12 object-contain bg-white rounded"
+                      />
                     )}
+                    <div>
+                      <span>{item.type} (x{item.quantity || 1})</span>
+                      {item.description && (
+                        <div className="text-xs text-gray-600">{item.description}</div>
+                      )}
+                    </div>
                   </div>
+                  <span>
+                    R$ {(
+                      parseFloat(
+                        item.price
+                          .replace('R$', '')
+                          .replace(/\./g, '')
+                          .replace(',', '.')
+                      ) * (item.quantity || 1)
+                    ).toFixed(2).replace('.', ',')}
+                  </span>
                 </div>
-                <span>R$ {(parseFloat(item.price.replace('R$', '').replace(',', '.')) * (item.quantity || 1)).toFixed(2).replace('.', ',')}</span>
+              ))}
+              <div className="mt-2 text-right text-humores-bg2 font-bold">
+                Total da compra: R$ {total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </div>
-            ))}
-          </div>
-        ))
+            </div>
+          );
+        })
       ) : (
         <p className="text-gray-700 text-center">Você ainda não realizou nenhuma compra.</p>
       )}

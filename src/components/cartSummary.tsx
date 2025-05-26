@@ -30,7 +30,13 @@ export function CartSummary({ cartItems, removeFromCart, setCartItems }: CartSum
 
   const total = cartItems.reduce(
     (sum, item) =>
-      sum + parseFloat(item.price.replace('R$', '').replace(',', '.')) * (item.quantity || 1),
+      sum +
+      parseFloat(
+        item.price
+          .replace('R$', '')
+          .replace(/\./g, '')
+          .replace(',', '.')
+      ) * (item.quantity || 1),
     0
   );
 
@@ -105,7 +111,12 @@ export function CartSummary({ cartItems, removeFromCart, setCartItems }: CartSum
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <span>R$ {(parseFloat(item.price.replace('R$', '').replace(',', '.')) * (item.quantity || 1)).toFixed(2).replace('.', ',')}</span>
+              <span>R$ {(parseFloat(
+                item.price
+                  .replace('R$', '')
+                  .replace(/\./g, '')
+                  .replace(',', '.')
+              ) * (item.quantity || 1)).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
               <button
                 className="bg-[#DCAB6B] text-humores-bg4 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer"
                 onClick={() => removeFromCart(item.id)}
@@ -116,7 +127,7 @@ export function CartSummary({ cartItems, removeFromCart, setCartItems }: CartSum
           </div>
         ))}
         <div className="text-lg font-bold text-humores-bg2 mt-4">
-          Total: R$ {total.toFixed(2).replace('.', ',')}
+          Total: R$ {total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </div>
       </div>
       <div className="mb-6">

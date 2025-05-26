@@ -250,11 +250,16 @@ export function Header({ cartItems, removeFromCart, clearCart, finalizePurchase 
                   {cartItems
                     .reduce(
                       (total, item) =>
-                        total + parseFloat(item.price.replace('R$', '').replace(',', '.')) * (item.quantity || 1),
+                        total +
+                        parseFloat(
+                          item.price
+                            .replace('R$', '')
+                            .replace(/\./g, '')
+                            .replace(',', '.')
+                        ) * (item.quantity || 1),
                       0
                     )
-                    .toFixed(2)
-                    .replace('.', ',')}
+                    .toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </div>
                 <button
                   className="bg-[#DCAB6B] text-humores-bg4 px-4 py-2 rounded hover:bg-humores-bg2 hover:text-humores-bg4 transition-colors cursor-pointer mt-4 w-full"
